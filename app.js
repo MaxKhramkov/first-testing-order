@@ -1,16 +1,15 @@
 "use strict";
 
-const numberOfFilms = +prompt('How many movies are you wached?', "");
+let numberOfFilms;
 
-if(numberOfFilms <= 10) {
-    console.log('you have sean not many movies.');
-} else if(numberOfFilms > 10 && numberOfFilms < 30){
-    console.log('you have sean many movies');
-} else if(numberOfFilms >= 30) {
-    console.log('you love movies');
-} else{
-    console.log('agan');
+function start() {
+    numberOfFilms = +prompt('How many movies are you wached?', "");
+
+    while(numberOfFilms == '' || numberOfFilms === null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('How many movies are you wached?', "");
+    }
 }
+start();
 
 const personalMovieDB = {
     count: numberOfFilms,
@@ -20,20 +19,48 @@ const personalMovieDB = {
     privat: false
 };
 
-for(let i = 0; i < 2; i++){
-    const a = prompt("One of the lasted movies are you whatched?", ""),
-          b = prompt("What is it rate? ", "");
-    
-    if (a != '' && a != null && a.length < 50 && b != '' && b != null ) {
-        personalMovieDB.movies[a] = b;
-        console.log('ok');
+function detectPersonalLevel(){
+    if(numberOfFilms <= 10) {
+        console.log('you have sean not many movies.');
+    } else if(numberOfFilms > 10 && numberOfFilms < 30){
+        console.log('you have sean many movies');
+    } else if(numberOfFilms >= 30) {
+        console.log('you love movies');
     } else{
-        console.log('not ok');
-        i--;
+        console.log('agan');
     }
 }
+detectPersonalLevel();
 
-console.log(personalMovieDB);
+function rememberMyFilms() {
+    for(let i = 0; i < 2; i++){
+        const a = prompt("One of the lasted movies are you whatched?", ""),
+              b = prompt("What is it rate? ", "");
+        
+        if (a != '' && a != null && a.length < 50 && b != '' && b != null ) {
+            personalMovieDB.movies[a] = b;
+            console.log('ok');
+        } else{
+            console.log('not ok');
+            i--;
+        }
+    }
+}
+rememberMyFilms();
+
+function writeYourGenres() {
+    for(let i = 1; i < 4; i++) {
+        personalMovieDB.genres[i - 1] = prompt(`What is your favorit genres in movies ${i}:`, "");
+    }
+}
+writeYourGenres();
+
+function shwoMyDb(hidden) {
+    if(!hidden){
+        console.log(personalMovieDB);
+    }
+}
+shwoMyDb(personalMovieDB.privat);
 
 /* 
 
@@ -64,4 +91,15 @@ console.log(personalMovieDB);
 "Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
 
 4) Потренироваться и переписать цикл еще двумя способами
+*/
+
+/* Задание на урок:
+1) Первую часть задания повторить по уроку
+
+2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+false - выводит в консоль главный объект программы
+
+3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
 */
