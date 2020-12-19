@@ -13,67 +13,85 @@
 "Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"
 */
 
-let numberOfFilms;
-
-function start() {
-    numberOfFilms = +prompt('How many movies are you wached?', "");
-
-    while(numberOfFilms == '' || numberOfFilms === null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt('How many movies are you wached?', "");
-    }
-}
-start();
-
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false
+    privat: false,
+
+    start: function() {
+        personalMovieDB.count = +prompt('How many movies are you wached?', "");
+        while(personalMovieDB.count == '' || personalMovieDB.count === null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt('How many movies are you wached?', "");
+        }
+    },
+
+    detectPersonalLevel: function(){
+        if(personalMovieDB.count <= 10) {
+            console.log('you have sean not many movies.');
+        } else if(personalMovieDB.count > 10 && personalMovieDB.count < 30){
+            console.log('you have sean many movies');
+        } else if(personalMovieDB.count >= 30) {
+            console.log('you love movies');
+        } else{
+            console.log('agan');
+        }
+    },
+
+    rememberMyFilms: function() {
+        for(let i = 0; i < 1; i++){
+            const a = prompt("One of the lasted movies are you whatched?", ""),
+                  b = prompt("What is it rate? ", "");
+            
+            if (a != '' && a != null && a.length < 50 && b != '' && b != null ) {
+                personalMovieDB.movies[a] = b;
+                console.log('ok');
+            } else{
+                console.log('not ok');
+                i--;
+            }
+        }
+    },
+
+    writeYourGenres: function() {
+        for(let i = 1; i < 3; i++) {
+            let askingGenres = prompt(`What is your favorit genres in movies ${i}:`, "");
+            if(askingGenres === '' || askingGenres === null ) {
+                console.log("please enter corect genere");
+                i--; 
+            } else {
+                personalMovieDB.genres[i - 1] = askingGenres;
+            }    
+        }
+        personalMovieDB.genres.forEach((item, i) => {
+            console.log(`favorite genre # ${i} is "${item}".`);
+        });
+    },
+
+    toggleVisibleMyDB: function(){
+        let privetDB = confirm("Please make choise if your data base privet or no? ");
+        if(privetDB === false){
+            personalMovieDB.privat = false;
+        } else{
+            personalMovieDB.privat = true;
+        }
+    },
+
+    shwoMyDb: function(hidden) {
+        if(!hidden){
+            console.log(personalMovieDB);
+        }
+    },
 };
 
-function detectPersonalLevel(){
-    if(numberOfFilms <= 10) {
-        console.log('you have sean not many movies.');
-    } else if(numberOfFilms > 10 && numberOfFilms < 30){
-        console.log('you have sean many movies');
-    } else if(numberOfFilms >= 30) {
-        console.log('you love movies');
-    } else{
-        console.log('agan');
-    }
-}
-detectPersonalLevel();
+personalMovieDB.start();
+personalMovieDB.detectPersonalLevel(); 
+personalMovieDB.rememberMyFilms();
+personalMovieDB.writeYourGenres();
+personalMovieDB.toggleVisibleMyDB();
+personalMovieDB.shwoMyDb(personalMovieDB.privat);
 
-function rememberMyFilms() {
-    for(let i = 0; i < 2; i++){
-        const a = prompt("One of the lasted movies are you whatched?", ""),
-              b = prompt("What is it rate? ", "");
-        
-        if (a != '' && a != null && a.length < 50 && b != '' && b != null ) {
-            personalMovieDB.movies[a] = b;
-            console.log('ok');
-        } else{
-            console.log('not ok');
-            i--;
-        }
-    }
-}
-rememberMyFilms();
-
-function writeYourGenres() {
-    for(let i = 1; i < 4; i++) {
-        personalMovieDB.genres[i - 1] = prompt(`What is your favorit genres in movies ${i}:`, "");
-    }
-}
-writeYourGenres();
-
-function shwoMyDb(hidden) {
-    if(!hidden){
-        console.log(personalMovieDB);
-    }
-}
-shwoMyDb(personalMovieDB.privat);
 
 /* 
 
