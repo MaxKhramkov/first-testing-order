@@ -1,5 +1,37 @@
 "use strict";
 
+/*
+1. make object "personalMovieD"
+
+2. u have in it: count, movies{}, actors{}, genres[], privat"bool"
+
+3. u have in it functions: "start" it's asking "how many movies you are whached?"
+    and checking if it's not empty, or null ,or if it's not a nuber 
+    by while if not all right it asking agen
+    and puting a number in to "count" 
+
+4. u have in it a function: "detectPersonalLevel" it checking how meny movies u have
+    if it less than 10 "you dont have much movies"
+    if it bigger than 10 and less than 30: "you have sean some movies"
+    if it bigger than 30: "you love movies"
+
+5. make function "rememberMyFilms" make loop in it that will ask 
+    a. One of the lasted movies are you whatched?
+    b. What is it rate?
+    check them if != nuul, !="", if the length of first not bigger than 50 chars
+    if they ok put them to "personalMovieDB.movies" like this "ant man : 1"
+
+6. make function "writeYourGenres" : make for loop and ask "What is your favorit genres in movies wright them all:"
+    check anwer is not a "" and "null"
+    if not slipt all anwers and put them to "personalMovieDB.genres"
+ 
+7. make function "toggleVisibleMyDB": put in if checking of "personalMovieDB.privat
+    need to do toggle
+
+8. make function "shwoMyDb" if privat false than you can see it
+
+*/
+
 const personalMovieDB = {
     count: 0,
     movies: {},
@@ -136,9 +168,8 @@ personalMovieDB.shwoMyDb(personalMovieDB.privat);
 "Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
 
 4) Потренироваться и переписать цикл еще двумя способами
-*/
 
-/* Задание на урок:
+Задание на урок:
 1) Первую часть задания повторить по уроку
 
 2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
